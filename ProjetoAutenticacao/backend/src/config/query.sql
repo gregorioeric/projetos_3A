@@ -1,0 +1,44 @@
+-- Active: 1781179959892@@127.0.0.1@3306@web_store_db
+CREATE DATABASE web_store_db;
+
+USE web_store_db;
+
+CREATE TABLE users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_name VARCHAR(180) NOT NULL,
+    user_email VARCHAR(180) NOT NULL UNIQUE,
+    user_password VARCHAR(300) NOT NULL,
+    user_phone VARCHAR(20),
+    user_status BOOLEAN DEFAULT TRUE,
+    user_createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    user_updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE categories (
+    category_id INT AUTO_INCREMENT PRIMARY KEY,
+    category_name VARCHAR(180) NOT NULL,
+    category_status BOOLEAN DEFAULT TRUE,
+    category_createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    category_updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE products (
+    product_id INT AUTO_INCREMENT PRIMARY KEY,
+    product_img VARCHAR(255) NOT NULL,
+    product_name VARCHAR(180) NOT NULL,
+    product_description VARCHAR(180),
+    product_price DECIMAL(10, 2) NOT NULL,
+    product_status BOOLEAN DEFAULT TRUE,
+    product_createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    product_updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE tokens (
+    token_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    token VARCHAR(255) NOT NULL,
+    token_expiresAt DATETIME NOT NULL,
+    token_createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    token_updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users (user_id)
+);
