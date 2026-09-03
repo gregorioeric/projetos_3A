@@ -2,8 +2,8 @@ import { NavLink } from "react-router-dom";
 
 const Navigation = () => {
   return (
-    <nav>
-      <ul>
+    <nav className="main-menu">
+      <ul className="primary-menu">
         <li>
           <NavLink to="/">Home</NavLink>
         </li>
@@ -11,7 +11,7 @@ const Navigation = () => {
           <NavLink to="/products">Products</NavLink>
         </li>
       </ul>
-      <ul>
+      <ul className="second-menu">
         <li>
           <NavLink to="/login">Login</NavLink>
         </li>

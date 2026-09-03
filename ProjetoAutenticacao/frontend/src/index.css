@@ -8,6 +8,21 @@
 
 body {
   font-family: cursive;
+  background: linear-gradient(
+    132deg,
+    rgba(66, 66, 66, 1) 21%,
+    rgba(95, 108, 114, 1) 21%,
+    rgba(95, 110, 117, 1) 44%,
+    rgba(94, 116, 126, 1) 41%,
+    rgba(89, 152, 177, 1) 64%,
+    rgba(90, 145, 167, 1) 65%,
+    rgba(84, 184, 223, 1) 83%,
+    rgba(83, 193, 237, 1) 83%,
+    rgba(100, 178, 209, 1) 93%,
+    rgba(29, 167, 222, 1) 93%
+  );
+  background-repeat: no-repeat;
+  height: 100vh;
 }
 
 li,
@@ -29,4 +44,49 @@ Estilo da Header
 *************************/
 .content-header {
   display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+}
+
+/*******************************
+  Estilo dos Menus
+*******************************/
+
+.main-menu {
+  display: flex;
+  gap: 2rem;
+}
+
+.main-menu ul {
+  display: flex;
+  gap: 2rem;
+}
+
+.main-menu ul li a {
+  display: flex;
+  font-size: 1.5rem;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  color: rgb(50, 50, 50);
+  transition: all 400ms ease-in-out;
+  position: relative;
+}
+
+.main-menu ul li a:hover {
+  color: rgb(255, 255, 255);
+}
+
+.main-menu ul li a::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 5px;
+  background: rgb(50, 50, 50);
+  transition: all 300ms ease-in-out;
+}
+
+.main-menu ul li a:hover::before {
+  width: 100%;
 }
