@@ -35,7 +35,7 @@ class ProductsModel {
       );
     `;
 
-    const result = await conn.execute(query, [
+    const [result] = await conn.execute(query, [
       product_img,
       product_name,
       product_description,
@@ -63,7 +63,7 @@ class ProductsModel {
       WHERE product_id = ?;
     `;
 
-    const result = await conn.execute(query, [
+    const [result] = await conn.execute(query, [
       product_img,
       product_name,
       product_description,
@@ -74,4 +74,15 @@ class ProductsModel {
 
     return result;
   }
+
+  async deleteProduct(id) {
+    const [result] = await conn.execute(
+      "DELETE FROM products WHERE product_id = ?;",
+      [id],
+    );
+
+    return result;
+  }
 }
+
+export default new ProductsModel();
