@@ -44,8 +44,8 @@ class ProductsController {
       product_img,
       product_name: product_name.trim(),
       product_description: product_description.trim(),
-      product_price: product_price.trim(),
-      product_status: product_status.trim(),
+      product_price: product_price,
+      product_status: product_status,
     });
 
     if (!result) {
@@ -73,8 +73,8 @@ class ProductsController {
       product_img,
       product_name: product_name.trim(),
       product_description: product_description.trim(),
-      product_price: product_price.trim(),
-      product_status: product_status.trim(),
+      product_price: product_price,
+      product_status: product_status,
     });
 
     if (!result) {
@@ -87,4 +87,22 @@ class ProductsController {
       success: "Product updated successfully!",
     });
   }
+
+  async deleteProduct(req, res) {
+    const { id } = req.params;
+
+    const result = ProductsService.deleteProduct(id);
+
+    if (!result) {
+      return res.status(401).json({
+        error: "Product is not Deleted!",
+      });
+    }
+
+    return res.status(201).json({
+      success: "Product deleted successfully!",
+    });
+  }
 }
+
+export default new ProductsController();

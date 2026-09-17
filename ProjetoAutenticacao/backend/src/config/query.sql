@@ -1,4 +1,4 @@
--- Active: 1781179959892@@127.0.0.1@3306@web_store_db
+-- Active: 1786707313925@@127.0.0.1@3306@web_store_db
 CREATE DATABASE web_store_db;
 
 USE web_store_db;
@@ -24,9 +24,9 @@ CREATE TABLE categories (
 
 CREATE TABLE products (
     product_id INT AUTO_INCREMENT PRIMARY KEY,
-    product_img VARCHAR(255) NOT NULL,
+    product_img VARCHAR(255),
     product_name VARCHAR(180) NOT NULL,
-    product_description VARCHAR(180),
+    product_description VARCHAR(180) NOT NULL,
     product_price DECIMAL(10, 2) NOT NULL,
     product_status BOOLEAN DEFAULT TRUE,
     product_createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -42,3 +42,5 @@ CREATE TABLE tokens (
     token_updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
+
+DROP TABLE products;

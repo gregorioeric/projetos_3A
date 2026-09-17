@@ -1,7 +1,9 @@
+import Form from "../components/Form";
+
 const Login = () => {
   return (
     <div>
-      <h1>Login</h1>
+      <Form btnName="Login" title="Login" type="Login" />
     </div>
   );
 };

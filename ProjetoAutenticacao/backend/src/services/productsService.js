@@ -2,7 +2,8 @@ import ProductsModel from "../models/productsModel.js";
 
 class ProductsService {
   async getAllProducts() {
-    const getProducts = await ProductsModel.selectProducts();
+    const [getProducts] = await ProductsModel.selectProducts();
+    console.log(getProducts);
 
     if (getProducts.length === 0) {
       return false;
