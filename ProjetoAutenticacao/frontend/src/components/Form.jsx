@@ -1,5 +1,8 @@
 import { useState } from "react";
 import Input from "./Input";
+import { NavLink } from "react-router-dom";
+import Button from "./Button";
+import AccountExists from "./AccountExists";
 
 const Form = ({ btnName, formName, type }) => {
   const [formData, setFormData] = useState({
@@ -15,50 +18,95 @@ const Form = ({ btnName, formName, type }) => {
       [e.target.name]: e.target.value,
     });
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (type === "Register") {
+      if (formData.confirm_password !== formData.user_password) {
+        console.log("Passwords do not match");
+        return;
+      }
+
+      const { confirm_password, ...newFormData } = formData;
+      console.log("Registering user with data:", newFormData);
+    }
+  };
+
   return (
     <div className="container-form">
       <h2>{formName}</h2>
       <form>
-        {type === "Register" && (
+        <div className="container-inputs">
+          {type === "Register" && (
+            <Input
+              type="text"
+              name="user_name"
+              id="user_name"
+              label="Name"
+              value={formData.user_name}
+              onChange={handleChange}
+              msgClass="teste"
+            />
+          )}
           <Input
             type="text"
-            name="user_name"
-            id="user_name"
-            label="Name"
-            value={formData.user_name}
+            name="user_email"
+            id="user_email"
+            label="Email"
+            value={formData.user_email}
             onChange={handleChange}
             msgClass="teste"
           />
-        )}
-        <Input
-          type="text"
-          name="user_email"
-          id="user_email"
-          label="Email"
-          value={formData.user_email}
-          onChange={handleChange}
-          msgClass="teste"
-        />
-        <Input
-          type="text"
-          name="user_password"
-          id="user_password"
-          label="Password"
-          value={formData.user_password}
-          onChange={handleChange}
-          msgClass="teste"
-        />
-        {type === "Register" && (
           <Input
             type="text"
-            name="confirm_password"
-            id="confirm_password"
-            label="Confirmar Senha"
-            value={formData.confirm_password}
+            name="user_password"
+            id="user_password"
+            label="Password"
+            value={formData.user_password}
             onChange={handleChange}
             msgClass="teste"
           />
-        )}
+          {type === "Register" && (
+            <Input
+              type="text"
+              name="confirm_password"
+              id="confirm_password"
+              label="Confirmar Senha"
+              value={formData.confirm_password}
+              onChange={handleChange}
+              msgClass="teste"
+            />
+          )}
+
+          {type === "Login" && (
+            <div className="forget-password">
+              <NavLink to="/forgot-password">Esqueceu a senha?</NavLink>
+            </div>
+          )}
+        </div>
+        <div className="container-btn">
+          <Button
+            nameClass="primary"
+            handleSubmit={handleSubmit}
+            title={btnName}
+          />
+        </div>
+        <div className="container-account-exist">
+          {type === "Register" ? (
+            <AccountExists
+              nameLink="/login"
+              titleLink="Login"
+              title="Já possui uma conta?"
+            />
+          ) : (
+            <AccountExists
+              nameLink="/register"
+              titleLink="Register"
+              title="Não possui uma conta?"
+            />
+          )}
+        </div>
       </form>
     </div>
   );
