@@ -26,6 +26,15 @@ class UsersModel {
     const [rows] = await conn.execute(query);
     return rows;
   }
+
+  async selectUserByEmail(email, id = 0) {
+    const [row] = await conn.execute(
+      "SELECT * FROM users WHERE user_email = ? AND user_id != ?",
+      [email, id],
+    );
+
+    return row;
+  }
 }
 
 export default new UsersModel();

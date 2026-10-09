@@ -3,6 +3,7 @@ import Input from "./Input";
 import { NavLink } from "react-router-dom";
 import Button from "./Button";
 import AccountExists from "./AccountExists";
+import Api from "../api/api";
 
 const Form = ({ btnName, formName, type }) => {
   const [formData, setFormData] = useState({
@@ -19,7 +20,7 @@ const Form = ({ btnName, formName, type }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (type === "Register") {
@@ -29,7 +30,11 @@ const Form = ({ btnName, formName, type }) => {
       }
 
       const { confirm_password, ...newFormData } = formData;
-      console.log("Registering user with data:", newFormData);
+      const result = await Api.post("users", newFormData);
+      console.log("Registering user with data:", result);
+    } else if (type === "Login") {
+      const result = await Api.post("auth/login", formData);
+      console.log(result);
     }
   };
 

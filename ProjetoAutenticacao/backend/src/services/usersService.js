@@ -25,6 +25,16 @@ class UsersService {
 
     return users;
   }
+
+  async getUserByEmail(email, id) {
+    const [result] = await UsersModel.selectUserByEmail(email, id);
+
+    if (!result) {
+      return false;
+    }
+
+    return result;
+  }
 }
 
 export default new UsersService();

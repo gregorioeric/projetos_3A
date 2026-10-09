@@ -5,13 +5,16 @@ class UsersController {
     const { user_name, user_email, user_password, user_phone, user_status } =
       req.body;
 
-    const getAllUsers = UsersService.getAllUsers();
-    const emailExists = getAllUsers.find(
-      (email) => email.user_email === user_email,
-    );
+    const emailExists = await UsersService.getUserByEmail(user_email);
+
+    if (emailExists) {
+      return res.status(404).json({
+        message: "Email already exists!",
+      });
+    }
 
     return res.status(200).json({
-      emailExists,
+      success: "User created successfully!",
     });
   }
 
