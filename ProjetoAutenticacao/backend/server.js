@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import userRoute from "./src/routes/users.route.js";
 import productRoute from "./src/routes/products.route.js";
+import authRoute from "./src/routes/auth.route.js";
 
 const app = express();
 
@@ -14,6 +15,7 @@ const PORT = process.env.SERVER_PORT;
 
 app.use("/users", userRoute);
 app.use("/products", productRoute);
+app.use("/auth", authRoute);
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta http://localhost:${PORT}`);
